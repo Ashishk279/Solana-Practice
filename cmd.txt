@@ -33,3 +33,6 @@ solana config set -k .\AshwhQKHScGq1nzpMLj9WsGG97EHCLPZfNsfMFhHvDTG.json
 ## get some fake SOL in this address 
 solana airdrop 0.42
 
+## Generating a new keypair
+solana-keygen new -o Apykey.json
+

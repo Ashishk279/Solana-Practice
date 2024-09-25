@@ -36,3 +36,9 @@ solana airdrop 0.42
 
 ## Generating a new keypair
 solana-keygen new -o Apykey.json
+
+## Borsh - for serializing and deserializing
+npm i @coral-xyz/borash
+
+## TypeError: src.toArrayLike is not a function
+npm install bn.js

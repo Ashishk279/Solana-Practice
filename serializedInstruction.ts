@@ -27,6 +27,7 @@ const instructionBuffer = buffer.subarray(0, equipPlayerSchema.getSpan(buffer))
 console.log(equipPlayerSchema.getSpan(buffer))
 console.log(instructionBuffer)
 
+
 const main = async () => {
 
   const endpoint = clusterApiUrl(

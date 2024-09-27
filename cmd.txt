@@ -36,3 +36,9 @@ solana airdrop 0.42
 ## Generating a new keypair
 solana-keygen new -o Apykey.json
 
+## Solana Program Library (spl)
+@solana/spl-token
+
+## Library that help to add metadata to tokens
+npm i @metaplex-foundation/mpl-token-metadata@2
+

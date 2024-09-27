@@ -42,3 +42,12 @@ npm i @coral-xyz/borash
 
 ## TypeError: src.toArrayLike is not a function
 npm install bn.js
+
+## bs58 - library
+npm i bs58
+
+## Solana Program Library (spl)
+@solana/spl-token
+
+## Library that help to add metadata to tokens
+npm i @metaplex-foundation/mpl-token-metadata@2

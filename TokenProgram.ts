@@ -1,7 +1,7 @@
 // You'll notice our token account does not have a pretty symbol and shows up as 'Unknown Token' in Explorer. That's because our token has no metadata! Let's add some!!
 
 import { createCreateMetadataAccountV3Instruction } from "@metaplex-foundation/mpl-token-metadata";
-import { createAccount, createMint, getOrCreateAssociatedTokenAccount, mintTo, transfer } from "@solana/spl-token";
+import { approve, burn, createAccount, createMint, getOrCreateAssociatedTokenAccount, mintTo, revoke, transfer } from "@solana/spl-token";
 import { Connection, clusterApiUrl, Keypair, PublicKey, Transaction, sendAndConfirmTransaction } from "@solana/web3.js";
 import fs from 'fs';
 
@@ -15,6 +15,8 @@ const MINOR_UNITS_PER_MAJOR_UNITS = Math.pow(10, 2);
 
 const tokenMintAddress = new PublicKey("JA7Pw2YHf3P1JfHD3oJDv2XWHg9PtaR9QFPxvDthx17h");  // newly token mint address
 const tokenAccountAddress = new PublicKey("4f9pgUaa1ZP6H5rjkUzkPfvTuKqSq1uA64AbpbSbP4R2");  // newly token account address
+
+const delegate = new PublicKey("3q38PPKtquk3fkPYnovmyQtDrbyhRd9HiyDZfoZmUSEn");
 
 const metadataData = {
     name: "Solana Avatar Token",
@@ -140,6 +142,40 @@ const TransferToken = async(getSourceATA: any, getDestinationATA: any) => {
 }
 
 
+const Approve = async (sourceATA: any) => {
+    const approveTransactionSignature = await approve(
+        connection,
+        user,
+        sourceATA.address,
+        delegate,
+        user.publicKey,
+        5 * MINOR_UNITS_PER_MAJOR_UNITS,
+      );
+      return approveTransactionSignature
+}
+
+const Revoke = async (sourceATA: any) => {
+    const revokeTransactionSignature = await revoke(
+        connection,
+        user,
+        sourceATA.address,
+        user.publicKey,
+      );
+      return revokeTransactionSignature
+}
+
+const Burn = async (sourceATA: any, ) => {
+    const transactionSignature = await burn(
+        connection,
+        user,
+        sourceATA.address,
+        tokenMintAddress,
+        user,
+        5 * MINOR_UNITS_PER_MAJOR_UNITS,
+      );
+      return transactionSignature
+}
+
 const main = async () => {
     // let tokenMintAddress = await TokenMint();
     // console.log(`✅ Finished! Created token mint: https://explorer.solana.com/address/${tokenMintAddress}?cluster=devnet`);
@@ -160,8 +196,18 @@ const main = async () => {
     let recieverATA = await AssociatedAccount(reciever)
     console.log(`✅ Get Associated Token Account of Reciever:: `, recieverATA.address.toBase58());
 
-    let transferToken = await TransferToken(userATA, recieverATA)
-    console.log(`✅ Success! Token Transfer Transaction: https://explorer.solana.com/tx/${transferToken}?cluster=devnet`)
+    // let transferToken = await TransferToken(userATA, recieverATA)
+    // console.log(`✅ Success! Token Transfer Transaction: https://explorer.solana.com/tx/${transferToken}?cluster=devnet`)
+    
+
+    // let approveTokens = await Approve(userATA)
+    // console.log(`Approve Delegate Transaction: https://explorer.solana.com/tx/${approveTokens}?cluster=devnet`)
+
+    // let revokeTokens = await Revoke(userATA);
+    // console.log(`✅ Revoke Delegate Transaction: https://explorer.solana.com/tx/${revokeTokens}?cluster=devnet`)
+
+    let burnTokens = await Burn(userATA);
+    console.log(`✅ Revoke Delegate Transaction: https://explorer.solana.com/tx/${burnTokens}?cluster=devnet`)
 }
 
 main()

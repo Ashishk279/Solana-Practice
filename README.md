@@ -51,3 +51,30 @@ npm i bs58
 
 ## Library that help to add metadata to tokens
 npm i @metaplex-foundation/mpl-token-metadata@2
+
+## To add metadata in NFT we use Umi Metaplex Library
+npm i @metaplex-foundation/umi-bundle-defaults 
+@metaplex-foundation/mpl-token-metadata 
+@metaplex-foundation/umi 
+@metaplex-foundation/umi-uploader-irys
+
+
+## Spi-Token Cli- Create token on cli
+spl-token
+solana-keygen grind --starts-with BTo:1
+solana-keygen grind --starts-with ATo:1
+
+spl-token create-token AToEpLDQuemi7iTop3UpxR6oXTQnrKrv4PwwmL6Dtbxu.json
+spl-token create-token BToiuvf1pSR1ea2Uavva8sVuiU15GrBAa3qedpQ9c8kh.json
+
+-- Give Authority to any token
+spl-token create-token --mint-authority CGYyTqWUqSiYLXv6NuMrTWPuWsW7goTowrivJSjNNjM6 .\LPT2YX241FFtdFVK5h7TY8TojfzrdYdjHSUDVUtQnCH.json
+
+-- Mint A and B tokens 
+spl-token mint AToEpLDQuemi7iTop3UpxR6oXTQnrKrv4PwwmL6Dtbxu 1000 5Ya9vEP4UJ5tbnEc2yAohQJ5Q2gBo2bsEsEdaGvAbTU7 
+
+spl-token mint BToiuvf1pSR1ea2Uavva8sVuiU15GrBAa3qedpQ9c8kh 1000 CefoAJvCRLQUUkYr4zwJyML1Umr5SWpYcHhrTqWQdBHd
+
+spl-token accounts
+
+spl-token create-account BToiuvf1pSR1ea2Uavva8sVuiU15GrBAa3qedpQ9c8kh --owner ALicscmVXdYf374JAVLycQpkTxWwyvrueiRBCUzDCGBH --fee-payer ALicscmVXdYf374JAVLycQpkTxWwyvrueiRBCUzDCGBH.json
